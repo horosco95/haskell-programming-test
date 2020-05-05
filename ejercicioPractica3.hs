@@ -1,4 +1,4 @@
---import Text.Show.Functions
+import Text.Show.Functions
 --Ejercicio 1
 type Nombre = String
 type Notas = [Int]
@@ -28,15 +28,32 @@ aprobaron alumnos = (map nombre.filter aprobo) alumnos
 
 --Ejercicio 5
 productos nombres precios = zip nombres precios
-productos' nombres precios = zipWith (\nom precio-> (nom,precio)) nombres precios
+productos' nombres precios = zipWith (\nombres precios-> (nombres,precios))
 --Con point free:
---productos = zip 
---productos'  = zipWith (\nom precio-> (nom,precio))
+--productos  = zip 
+--productos' nom precio = zipWith (\nom precio-> (nom,precio))
 
 --zipWith (\ x y -> x+y) [2..5] [10..14]
 
 --Ejercicio 6
-data Flor= Flor {nombre :: String , aplicacion :: String , cantidadDeDemanda :: Int } deriving Show
+data Flor= Flor {name :: String , aplicacion :: String , cantidadDeDemanda :: Int } deriving Show
+rosa = Flor "rosa" "decorativo" 120
+jazmin = Flor "jazmin" "aromatizante" 100
+violeta = Flor "violeta" "infusion" 110
+orquidea= Flor "orquidea" "decorativo" 150
 
-maximoSegun::[Flor]->
-maximoSegun lista criterio= maximo filter (criterio) lista
+flores = [orquidea,rosa,violeta,jazmin]
+
+maximoSegun _ [a] = a
+maximoSegun condicion (x:xs) = (mayorSegun condicion) x (maximoSegun condicion xs)
+
+mayorSegun cond var1 var2 | cond var1 > cond var2 = var1
+                          | otherwise = var2
+--a: condicion=cantidadDeDemanda
+longitudNombre::Flor->Int
+longitudNombre = length.name
+restoDivCantDemand4 flor = rem (cantidadDeDemanda flor) 4
+
+--Ejercicio 7 a
+lista_comida= ["lechuga","anana","alfajor de chocolate"]
+--f1 lista_comida = 
