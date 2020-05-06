@@ -56,4 +56,6 @@ restoDivCantDemand4 flor = rem (cantidadDeDemanda flor) 4
 
 --Ejercicio 7 a
 lista_comida= ["lechuga","anana","alfajor de chocolate"]
---f1 lista_comida = 
+--cantidadVocales =
+
+--f1 lista = map () (filter () lista)
