@@ -1,4 +1,5 @@
-type Desgaste = Double
+import Text.Show.Functions
+type Desgaste = Float
 type Patente = String
 type Fecha =(Int, Int, Int)
 
@@ -70,21 +71,41 @@ necesitaRevision = (<=2015).anio.ultimoArreglo
 
 --Punto 3
 --parte 1 - (Integrante A)
-type ServicioMecanico = Auto -> Auto
-alfa :: ServicioMecanico
+
+alfa :: Auto -> Auto
 alfa vehiculo = vehiculo {rpm= min 2000 (rpm vehiculo) }
 
-bravo :: ServicioMecanico
+bravo :: Auto -> Auto
 bravo vehiculo = vehiculo {desgasteLlantas=[0, 0, 0, 0]}
 
-charly :: ServicioMecanico
+charly :: Auto -> Auto
 charly = bravo.alfa
 --parte 2 - (Integrante B)
-tango :: ServicioMecanico
-tango vehiculo= vehiculo
 
-zulu :: ServicioMecanico
-zulu vehiculo = lima (vehiculo {temperaturaAgua = 90})
+data Empleado = Empleado {
+ nombre :: String,
+ edad :: Int,
+ funciones::Auto->Auto
+} deriving Show
 
-lima :: ServicioMecanico
-lima vehiculo = vehiculo {desgasteLlantas = (\[_,_,c,d]->[0,0,c,d]) (desgasteLlantas vehiculo)}
+tango :: Empleado
+tango = Empleado {nombre="Tango", edad=31, funciones = nada}
+
+zulu :: Empleado
+zulu = Empleado {nombre="Zulu", edad=40, funciones = (funciones lima).aguaA90Grados}
+
+lima :: Empleado
+lima = Empleado {nombre="Lima", edad=28, funciones = cambio2Llantas}
+
+operaciones::Empleado->Auto->Auto
+operaciones mecanico auto= (funciones mecanico) auto
+
+
+nada :: Auto -> Auto
+nada vehiculo= vehiculo
+
+aguaA90Grados :: Auto -> Auto
+aguaA90Grados vehiculo = vehiculo {temperaturaAgua = 90}
+
+cambio2Llantas :: Auto -> Auto
+cambio2Llantas vehiculo = vehiculo {desgasteLlantas = (\[_,_,c,d]->[0,0,c,d]) (desgasteLlantas vehiculo)}
