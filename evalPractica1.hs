@@ -52,13 +52,20 @@ vehiculo4 = Auto {
 
 --Punto 1
 costoReparacion :: Auto -> Int
-costoReparacion auto | length (patente auto) == 7 = 12500
-                     | "DJ"<= patente auto && patente auto <="NB" = calculoPatental (patente auto)
+costoReparacion auto | esPatenteNueva.patente $ auto = 12500
+                     | estaEntre "DJ" "NB" . patente $ auto = calculoPatental.patente $ auto
                      | otherwise = 15000
 
-calculoPatental::Patente->Int
-calculoPatental patenteAuto | (('4'==).last) patenteAuto = ((3000*).length) patenteAuto
+estaEntre :: Patente -> Patente -> Patente -> Bool
+estaEntre cotaInf cotaSup unaPatente = ((cotaInf<=).take 2) unaPatente && ((cotaSup>=).take 2) unaPatente
+esPatenteNueva :: Patente -> Bool
+esPatenteNueva  = (==7).length
+
+calculoPatental :: Patente->Int
+calculoPatental patenteAuto | terminaEn '4' patenteAuto = ((3000*).length) patenteAuto
                             | otherwise = 20000
+terminaEn ::  Char -> Patente -> Bool
+terminaEn caracter = (caracter==).last
 
 --Punto 2
 --parte 1 - (Integrante A)
@@ -70,36 +77,26 @@ necesitaRevision :: Auto -> Bool
 necesitaRevision = (<=2015).anio.ultimoArreglo
 
 --Punto 3
+type Mecanico = Auto -> Auto
 --parte 1 - (Integrante A)
-
-alfa :: Auto -> Auto
+alfa :: Mecanico
 alfa vehiculo = vehiculo {rpm= min 2000 (rpm vehiculo) }
 
-bravo :: Auto -> Auto
+bravo :: Mecanico
 bravo vehiculo = vehiculo {desgasteLlantas=[0, 0, 0, 0]}
 
-charly :: Auto -> Auto
+charly :: Mecanico
 charly = bravo.alfa
+
 --parte 2 - (Integrante B)
+tango :: Mecanico
+tango = nada
 
-data Empleado = Empleado {
- nombre :: String,
- edad :: Int,
- funciones::Auto->Auto
-} deriving Show
+zulu :: Mecanico
+zulu = lima.aguaA90Grados
 
-tango :: Empleado
-tango = Empleado {nombre="Tango", edad=31, funciones = nada}
-
-zulu :: Empleado
-zulu = Empleado {nombre="Zulu", edad=40, funciones = (funciones lima).aguaA90Grados}
-
-lima :: Empleado
-lima = Empleado {nombre="Lima", edad=28, funciones = cambio2Llantas}
-
-operaciones::Empleado->Auto->Auto
-operaciones mecanico auto= (funciones mecanico) auto
-
+lima :: Mecanico
+lima = cambio2Llantas
 
 nada :: Auto -> Auto
 nada vehiculo= vehiculo
