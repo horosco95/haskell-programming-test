@@ -133,8 +133,8 @@ cantidadDesgaste::[Desgaste]->Int
 cantidadDesgaste llantasAuto= round.(*10).sum $ llantasAuto
 
 --Punto 5
-listaTec1= [zulu,tango,charly]
-listaTec2= [charly,lima,bravo]
+--listaTec1= [zulu,tango,charly]
+--listaTec2= [charly,lima,bravo]
 
 ordenReparacion :: Fecha -> [Mecanico] -> Auto -> Auto
 ordenReparacion unaFecha listaTecnicos unAuto= (actualizarFecha unaFecha) (foldl (flip ($)) unAuto listaTecnicos)
@@ -151,10 +151,16 @@ auto10 = Auto { patente = "DJV215", desgasteLlantas= [0.5, 0.15, 0.31, 0.45] , r
 auto11 = Auto { patente = "DJV214", desgasteLlantas= [0.5, 0.15, 0.31, 0.45] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (12,9,2017)}
 auto12 = Auto { patente = "DFH029", desgasteLlantas= [0.5, 0.15, 0.31, 0.45] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (12,9,2015)}
 
-listaAutos2 = [auto9,auto10,auto11,auto12]
-costoReparacionAutosConRevision listaAutos = sum.map costoReparacion.filter (necesitaRevision) $ listaAutos
+--listaAutos2 = [auto9,auto10,auto11,auto12]
 
+costoReparacionAutosConRevision :: [Auto] -> Int
+costoReparacionAutosConRevision listaAutos = sumarCostoReparacionPorAuto.filtrarAutosNecesitenRevision $ listaAutos
 
+sumarCostoReparacionPorAuto :: [Auto] -> Int
+sumarCostoReparacionPorAuto = sum.map costoReparacion
+
+filtrarAutosNecesitenRevision :: [Auto] -> [Auto]
+filtrarAutosNecesitenRevision = filter (necesitaRevision)
 --punto 7
 
 --parte 2
@@ -169,3 +175,26 @@ autosInfinitos' n = Auto {
  temperaturaAgua = 90,
  ultimoArreglo = (20, 1, 2013)
 } : autosInfinitos' (n + 1)
+{-
+Ejemplo:
+
+>costoReparacionAutosConRevision autosInfinitos
+NO Termina
+Como autosInfinitos genera una lista ilimitada de autos, al aplicar la
+funcion costoReparacionAutosConRevision este irá calculando el costo 
+de Reparacion por cada auto de la lista que necesite Revision, dicho 
+proceso tambien es infinito. Por lo cual al aplicar la funcion sum 
+sobre la lista resultante TAMPOCO termina de evaluar.
+
+Es posible modificar la funcion para que tome los primeros N elementos
+de la lista:
+-}
+costoReparacionAutosConRevisionPrimerosN n listaAutos = sumarCostoReparacionPorAuto.take n.filtrarAutosNecesitenRevision $ listaAutos
+
+{-
+Esta version si acepta lista infinita de autos ya que se encuentra limitado
+por la funcion take n, gracias a que Haskell utiliza Lazy Evaluation, por
+lo cual toma los primeros n elementos de la lista que se genera.
+Cuando se alcancen los n elementos de la lista infinita se aplica las
+funcion take n.
+-}
