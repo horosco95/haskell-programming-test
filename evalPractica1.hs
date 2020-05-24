@@ -129,7 +129,6 @@ estanOrdenadosTOC (a:[]) = odd.(cantidadDesgaste.desgasteLlantas) $ a
 estanOrdenadosTOC (a:b:cz) = (odd.cantidadDesgaste.desgasteLlantas $ a) && (even.cantidadDesgaste.desgasteLlantas $ b) && estanOrdenadosTOC cz
 
 cantidadDesgaste::[Desgaste]->Int
---cantidadDesgaste :: (Num a) => [a] -> a
 cantidadDesgaste llantasAuto= round.(*10).sum $ llantasAuto
 
 --Punto 5
@@ -143,7 +142,12 @@ actualizarFecha :: Fecha -> Auto -> Auto
 actualizarFecha unaFecha unAuto= unAuto {ultimoArreglo = unaFecha} 
 --Punto 6
 --parte 1 - integrante a
---tecnicosQueDejanEnCondiciones listaTecnicos unAuto = map (not esAutoPeligroso (flip ($)) unAuto) listaTecnicos
+
+cantidadTecnicosAutoOk :: Auto -> [Mecanico] -> Int
+cantidadTecnicosAutoOk vehiculo listaMecanicos = length.(filtrarMecanicos vehiculo) $ listaMecanicos 
+
+filtrarMecanicos :: Auto -> [Mecanico] -> [Mecanico]
+filtrarMecanicos x listaMecanicos=filter (\unElem -> not.esAutoPeligroso.unElem $ x) listaMecanicos
 
 --parte 2 - integrante b
 auto9 = Auto { patente = "AT001LN", desgasteLlantas= [0.5, 0.15, 0.31, 0.45] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (12,9,2014)}
