@@ -111,15 +111,15 @@ cambio2Llantas vehiculo = vehiculo {desgasteLlantas = (\[_,_,c,d]->[0,0,c,d]) (d
 
 auto1 = Auto { patente = "FG884NY", desgasteLlantas= [0.1,0.4,0.2,0] , rpm = 1950, temperaturaAgua = 80, ultimoArreglo = (2,5,2017)}
 auto2 = Auto { patente = "BKQ647", desgasteLlantas= [0.2,0.5,0.6,0.1] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (27,9,2018)}
-auto3= Auto { patente = "OFW321", desgasteLlantas= [0.1,0.1,0.1,0] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
+auto3 = Auto { patente = "OFW321", desgasteLlantas= [0.1,0.1,0.1,0] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
 
-auto4= Auto { patente = "DVB429", desgasteLlantas= [0.1,0.4,0.2,0] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
-auto5= Auto { patente = "VBG546", desgasteLlantas= [0.3,0.5,0.6,0.1] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
-auto6= Auto { patente = "MDA381", desgasteLlantas= [0.1,0.1,0.1,0] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
+auto4 = Auto { patente = "DVB429", desgasteLlantas= [0.1,0.4,0.2,0] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
+auto5 = Auto { patente = "VBG546", desgasteLlantas= [0.3,0.5,0.6,0.1] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
+auto6 = Auto { patente = "MDA381", desgasteLlantas= [0.1,0.1,0.1,0] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
 
-auto7= Auto { patente = "DSA429", desgasteLlantas= [0.1,0.4,0.2,0] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
+auto7 = Auto { patente = "DSA429", desgasteLlantas= [0.1,0.4,0.2,0] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
 
-auto8= Auto { patente = "AP002TM", desgasteLlantas= [0.1,0.4,0.2,0.1] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
+auto8 = Auto { patente = "AP002TM", desgasteLlantas= [0.1,0.4,0.2,0.1] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (5,1,2020)}
 
 --listaAutos1 = [auto1,auto2,auto3]
 
@@ -150,10 +150,10 @@ filtrarMecanicos :: Auto -> [Mecanico] -> [Mecanico]
 filtrarMecanicos x listaMecanicos=filter (\unElem -> not.esAutoPeligroso.unElem $ x) listaMecanicos
 
 --parte 2 - integrante b
-auto9 = Auto { patente = "AT001LN", desgasteLlantas= [0.5, 0.15, 0.31, 0.45] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (12,9,2014)}
-auto10 = Auto { patente = "DJV215", desgasteLlantas= [0.5, 0.15, 0.31, 0.45] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (12,9,2018)}
-auto11 = Auto { patente = "DJV214", desgasteLlantas= [0.5, 0.15, 0.31, 0.45] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (12,9,2017)}
-auto12 = Auto { patente = "DFH029", desgasteLlantas= [0.5, 0.15, 0.31, 0.45] , rpm = 2050, temperaturaAgua = 60, ultimoArreglo = (12,9,2015)}
+auto9 = Auto { patente = "AT001LN", desgasteLlantas= [0.51, 0.25, 0.21, 0.12] , rpm = 2150, temperaturaAgua = 90, ultimoArreglo = (11,11,2014)}
+auto10 = Auto { patente = "DJV215", desgasteLlantas= [0.61, 0.13, 0.11, 0.78] , rpm = 1858, temperaturaAgua = 99, ultimoArreglo = (19,1,2018)}
+auto11 = Auto { patente = "DJV214", desgasteLlantas= [0.21, 0.35, 0.16, 0.32] , rpm = 1959, temperaturaAgua = 50, ultimoArreglo = (22,8,2017)}
+auto12 = Auto { patente = "DFH029", desgasteLlantas= [0.80, 0.45, 0.19, 0.29] , rpm = 2112, temperaturaAgua = 88, ultimoArreglo = (30,9,2015)}
 
 --listaAutos2 = [auto9,auto10,auto11,auto12]
 
