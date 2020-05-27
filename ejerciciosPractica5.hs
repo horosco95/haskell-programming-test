@@ -28,10 +28,29 @@ pierdePeso num | num >2 = num-0.1*num
 hierbaMagica  = modificarEdad (const 0).modificarEnfermedad (const [])
 
 --Ejercicio 3
---a
+-- a
 medicamento hierbas raton = foldl (\unRaton unaHierba -> unaHierba unRaton) raton hierbas
 
 medicamento' hierbas raton = foldl (flip ($)) raton hierbas
+-- b
+antiAge = medicamento (replicate 3 hierbaBuena ++ [alcachofa]) 
+-- c
+reduceFatFast potencia raton = medicamento ([hierbaVerde "obesidad"] ++ (replicate potencia alcachofa)) raton
+
+-- d
+hierbaMilagrosa :: Animal -> Animal
+hierbaMilagrosa raton = medicamento (map hierbaVerde enfermedadesInfecciosas) raton
+
+
+---Ejercicio 4
+---a
+cantidadIdeal :: (Int -> Bool) -> Int
+cantidadIdeal f = (head.filter f) [1..]
+
 --b
-antiAge raton = medicamento (replicate 3 hierbaBuena ++ [alcachofa]) raton
---antiAge (Raton "bicenterata" 256.0 0.2 [])
+estanMejoresQueNunca  :: [Animal] -> (Animal -> Animal) -> Bool
+estanMejoresQueNunca animales unMedicamento = all ((<1).peso.unMedicamento) animales
+
+-- c
+experimento :: [Animal] -> Int
+experimento animales = cantidadIdeal (\potencia -> estanMejoresQueNunca animales (reduceFatFast potencia)) 
