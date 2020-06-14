@@ -101,7 +101,17 @@ gobernarUnAnio unGobierno unaCiudad = map (aplicarMedidas unGobierno) unaCiudad
 aplicarMedidas :: Gobierno -> Ciudadano -> Ciudadano
 aplicarMedidas unGobierno unCiudadano = foldl (flip ($))  unCiudadano  (medidas unGobierno)
 
+gobernarPeriodoCompleto :: Gobierno -> Ciudad -> Ciudad
 gobernarPeriodoCompleto unGobierno unaCiudad = foldl (flip ($))  unaCiudad (replicate (length.anios $ unGobierno) (gobernarUnAnio unGobierno))
 
 gobernarPeriodoCompleto' unGobierno unaCiudad = foldl (\ciudad f -> f unGobierno ciudad)  unaCiudad (replicate (length.anios $ unGobierno) gobernarUnAnio)
 
+--distribuyoRiqueza
+
+--Punto 5
+
+--kane = UnCiudadano {profesion= "Empresario",sueldo=100000, cantidadHijos=0,bienes=infinitosTrineos }
+
+--infinitosTrineos = infinitosTrineos' 0
+
+--infinitosTrineos' n = zip cycle ["Rosebud"] iterate *5 [1]
